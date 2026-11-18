@@ -6,7 +6,8 @@ on:
       - main
 
 env:
-    IMAGE_NAME: springboot-app
+    IMAGE_NAME: israrkhan786/springboot-app
+
 
 jobs:
   build:
@@ -35,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ env.IMAGE_NAME }}
+        run: docker push ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}:latest
 
 
       - name: Deploy to server
@@ -45,7 +46,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            docker pull ${{ env.IMAGE_NAME }}
+            docker pull ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}
             docker stop springboot-app || true
             docker rm springboot-app || true
             docker run -d --name springboot-app --restart unless-stopped -p 2330:2330 ${{ env.IMAGE_NAME }}
