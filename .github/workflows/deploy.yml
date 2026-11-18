@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-    IMAGE_NAME: israrkhan786/springboot-app
+    IMAGE_NAME: israrkhan786/springboot-app:latest
 
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}
+        run: docker push ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}:latest
 
 
       - name: Deploy to server
