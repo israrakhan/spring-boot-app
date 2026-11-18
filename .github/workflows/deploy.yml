@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ secrets.SERVER_USER }}/${{ env.IMAGE_NAME }}
 
 
       - name: Deploy to server
